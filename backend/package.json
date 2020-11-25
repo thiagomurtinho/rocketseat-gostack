@@ -5,5 +5,11 @@
   "main": "index.js",
   "repository": "http://github.com/thiagomurtinho/rocketseat-gostack",
   "author": "Thiago Murtinho",
-  "license": "MIT"
+  "license": "MIT",
+  "script:": {
+    
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
