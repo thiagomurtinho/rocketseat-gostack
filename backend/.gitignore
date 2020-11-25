@@ -1,0 +1,6 @@
+#package folder
+node_modules/
+
+#vscode
+.vscode
+

@@ -1,0 +1,9 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Rocketseat GoStack course",
+  "main": "index.js",
+  "repository": "http://github.com/thiagomurtinho/rocketseat-gostack",
+  "author": "Thiago Murtinho",
+  "license": "MIT"
+}
