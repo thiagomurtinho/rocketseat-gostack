@@ -2,14 +2,17 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Rocketseat GoStack course",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "http://github.com/thiagomurtinho/rocketseat-gostack",
   "author": "Thiago Murtinho",
   "license": "MIT",
-  "script:": {
-    
+  "scripts": {
+    "dev": "nodemon"
   },
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
