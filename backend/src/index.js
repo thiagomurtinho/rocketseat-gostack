@@ -1,36 +1,59 @@
 const express = require('express');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 
 app.use(express.json());
 
+const projects = [];
+
 app.get('/projects', (req, res) => {
-  const { title, owner } = req.query;
+  const { title } = req.query;
 
-  console.log(`title: ${title}`);
-  console.log(`owner: ${owner}`);
+  const results = title
+    ? projects.filter((project) => project.title.includes(title))
+    : projects;
 
-  return res.json(['project 1', 'project 2']);
+  return res.json(results);
 });
 
 app.post('/projects', (req, res) => {
   const { title, owner } = req.body;
 
-  console.log(`title: ${title}`);
-  console.log(`owner: ${owner}`);
+  const project = { id: uuidv4(), title, owner };
+  projects.push(project);
 
-  return res.json(['project 1', 'project 2', 'project 3']);
+  return res.json(project);
 });
 
 app.put('/projects/:id', (req, res) => {
-  const params = req.params;
+  const { id } = req.params;
+  const { title, owner } = req.body;
 
-  console.log(params);
-  return res.json(['project 4', 'project 2', 'project 3']);
+  const projectIndex = projects.findIndex((project) => project.id === id);
+
+  if (projectIndex < 0) {
+    return res.status(400).json({ err: 'does not find this search' });
+  }
+
+  const project = { id, title, owner };
+  projects[projectIndex] = project;
+
+  return res.json(project);
 });
 
 app.delete('/projects/:id', (req, res) => {
-  return res.json(['project 2', 'project 3']);
+  const { id } = req.params;
+
+  const projectIndex = projects.findIndex((project) => project.id === id);
+
+  if (projectIndex < 0) {
+    return res.status(400).json({ err: 'does not find this search' });
+  }
+
+  projects.splice(projectIndex, 1);
+
+  return res.status(204).send();
 });
 
-app.listen(3333, () => console.log('>>> Back-end started!'));
+app.listen(3333, () => console.log('✨ Back-end started!'));
