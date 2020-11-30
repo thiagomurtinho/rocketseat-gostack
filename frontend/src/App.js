@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from './services/api';
 
 import './App.css';
-import backgroundImg from './assets/xps.jpeg';
 import Header from './components/Header';
 
 function App() {
-  const [project, setProject] = useState([
-    'Desenvolviemento de App',
-    'Front-end web',
-  ]);
+  const [project, setProject] = useState([]);
 
   function handleAddProject() {
     setProject([...project, `New project ${Date.now()}`]);
   }
 
+  useEffect(() => {
+    api.get('projects').then((res) => {
+      setProject(res.data);
+    });
+  }, []);
+
   return (
     <>
       <Header title="Projects" />
-      <img width="400px" src={backgroundImg} alt="Notebook XPS" />
       <ul>
         {project.map((project) => (
-          <li key={project}>{project}</li>
+          <li key={project.id}>{project.title}</li>
         ))}
       </ul>
       <button type="button" onClick={handleAddProject}>
