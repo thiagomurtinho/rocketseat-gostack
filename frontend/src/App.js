@@ -5,23 +5,30 @@ import './App.css';
 import Header from './components/Header';
 
 function App() {
-  const [project, setProject] = useState([]);
-
-  function handleAddProject() {
-    setProject([...project, `New project ${Date.now()}`]);
-  }
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     api.get('projects').then((res) => {
-      setProject(res.data);
+      setProjects(res.data);
     });
   }, []);
+
+  async function handleAddProject() {
+    const response = await api.post('projects', {
+      title: `Novo Projeto ${Date.now()}`,
+      owner: 'Danilo Vieira',
+    });
+
+    const project = response.data;
+
+    setProjects([...projects, project]);
+  }
 
   return (
     <>
       <Header title="Projects" />
       <ul>
-        {project.map((project) => (
+        {projects.map((project) => (
           <li key={project.id}>{project.title}</li>
         ))}
       </ul>
