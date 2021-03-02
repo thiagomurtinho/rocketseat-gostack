@@ -5,12 +5,15 @@ import AppointmentsRepository from '../repositories/AppointmentRepository';
 import appointmentsRouter from '../routes/appointments.routes';
 
 interface IRequestDTO {
-  provider: string;
+  provider_id: string;
   date: Date;
 }
 
 class CreateAppointmentService {
-  public async execute({ provider, date }: IRequestDTO): Promise<Appointment> {
+  public async execute({
+    provider_id,
+    date,
+  }: IRequestDTO): Promise<Appointment> {
     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
     const appointmentDate = startOfHour(date);
@@ -24,7 +27,7 @@ class CreateAppointmentService {
     }
 
     const appointment = appointmentsRepository.create({
-      provider,
+      provider_id,
       date: appointmentDate,
     });
 
