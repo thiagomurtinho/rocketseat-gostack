@@ -4,3 +4,7 @@ node_modules/
 #vscode
 .vscode
 
+#files to multer
+tmp/*
+!tmp/.gitkeep
+
