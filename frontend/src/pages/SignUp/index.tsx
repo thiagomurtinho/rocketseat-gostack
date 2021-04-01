@@ -1,38 +1,46 @@
 import React from "react";
 import { FiArrowLeft, FiMail, FiUser, FiLock } from "react-icons/fi";
+import { Form } from "@unform/web";
 
 import logoImg from "../../assets/logo.svg";
 import { Background, Container, Content } from "./styles";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 
-const SignUp: React.FC = () => (
-  <Container>
-    <Background />
-    <Content>
-      <img src={logoImg} alt="GoBarber Logo" />
+const SignUp: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  function hanfleSubmit(data: object): void {
+    console.log(data);
+  }
 
-      <form action="#">
-        <h1>Faça seu cadastro</h1>
+  return (
+    <Container>
+      <Background />
+      <Content>
+        <img src={logoImg} alt="GoBarber Logo" />
 
-        <Input name="name" icon={FiUser} type="text" placeholder="Nome" />
-        <Input name="email" icon={FiMail} type="text" placeholder="E-mail" />
-        <Input
-          name="password"
-          icon={FiLock}
-          type="password"
-          placeholder="Senha"
-        />
+        <Form onSubmit={hanfleSubmit}>
+          <h1>Faça seu cadastro</h1>
 
-        <Button type="submit">Cadastrar</Button>
-      </form>
+          <Input name="name" icon={FiUser} type="text" placeholder="Nome" />
+          <Input name="email" icon={FiMail} type="text" placeholder="E-mail" />
+          <Input
+            name="password"
+            icon={FiLock}
+            type="password"
+            placeholder="Senha"
+          />
 
-      <a href="forgot">
-        <FiArrowLeft />
-        Voltar para logon
-      </a>
-    </Content>
-  </Container>
-);
+          <Button type="submit">Cadastrar</Button>
+        </Form>
+
+        <a href="forgot">
+          <FiArrowLeft />
+          Voltar para logon
+        </a>
+      </Content>
+    </Container>
+  );
+};
 
 export default SignUp;
