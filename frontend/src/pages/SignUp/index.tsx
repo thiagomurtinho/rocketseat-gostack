@@ -1,11 +1,11 @@
-import React from "react";
-import { FiArrowLeft, FiMail, FiUser, FiLock } from "react-icons/fi";
-import { Form } from "@unform/web";
+import React from 'react';
+import { FiArrowLeft, FiMail, FiUser, FiLock } from 'react-icons/fi';
+import { Form } from '@unform/web';
 
-import logoImg from "../../assets/logo.svg";
-import { Background, Container, Content } from "./styles";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import logoImg from '../../assets/logo.svg';
+import { Background, Container, Content } from './styles';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 const SignUp: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/ban-types
