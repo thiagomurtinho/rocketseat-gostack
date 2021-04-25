@@ -11,7 +11,7 @@ import logoImg from '../../assets/logo.svg';
 import { Background, Container, Content } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 
 interface SignInFormData {
   email: string;
