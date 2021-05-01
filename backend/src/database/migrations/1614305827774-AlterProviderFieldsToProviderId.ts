@@ -4,7 +4,6 @@ import {
   TableColumn,
   TableForeignKey,
 } from 'typeorm';
-import Appointment from '../../models/Appointment';
 
 export default class AlterProviderFieldsToProviderId1614305827774
   implements MigrationInterface {
@@ -16,7 +15,7 @@ export default class AlterProviderFieldsToProviderId1614305827774
         name: 'provider_id',
         type: 'uuid',
         isNullable: true,
-      })
+      }),
     );
 
     await queryRunner.createForeignKey(
@@ -28,7 +27,7 @@ export default class AlterProviderFieldsToProviderId1614305827774
         referencedTableName: 'users',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
-      })
+      }),
     );
   }
 
@@ -42,7 +41,7 @@ export default class AlterProviderFieldsToProviderId1614305827774
       new TableColumn({
         name: 'provider',
         type: 'varchar',
-      })
+      }),
     );
   }
 }
