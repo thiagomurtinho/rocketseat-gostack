@@ -57,6 +57,3 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
-
-#android emulator
-emuAndroid.vbs
