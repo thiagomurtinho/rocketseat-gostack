@@ -3,6 +3,9 @@
         "es2021": true
     },
     "extends": [
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
         "plugin:react/recommended",
         "airbnb",
         "plugin:@typescript-eslint/recommended",
@@ -23,6 +26,7 @@
         "prettier"
     ],
     "rules": {
+      "import/no-unresolved": "off",
       "react-hooks/rules-of-hooks": "error",
 	    "react-hooks/exhaustive-deps": "warn",
       "prettier/prettier": "error",
@@ -50,7 +54,10 @@
     },
     "settings": {
       "import/resolver": {
-        "typescript": {}
+        "typescript": {},
+        // "node": {
+          // "extensions": [".js", ".jsx", ".json", ".native.js"]
+        // }
       }
     }
 }
