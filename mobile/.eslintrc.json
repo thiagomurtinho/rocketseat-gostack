@@ -3,9 +3,9 @@
         "es2021": true
     },
     "extends": [
-        "plugin:import/errors",
-        "plugin:import/warnings",
-        "plugin:import/typescript",
+        "plugin:import/errors", //Erro de imoport não consta na aula
+        "plugin:import/warnings", //Erro de imoport não consta na aula
+        "plugin:import/typescript", //Erro de imoport não consta na aula
         "plugin:react/recommended",
         "airbnb",
         "plugin:@typescript-eslint/recommended",
@@ -55,9 +55,6 @@
     "settings": {
       "import/resolver": {
         "typescript": {},
-        // "node": {
-          // "extensions": [".js", ".jsx", ".json", ".native.js"]
-        // }
       }
     }
 }
