@@ -14,7 +14,8 @@ import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
-import getValidationErrors from '../../utils/getValidationErros';
+import getValidationErrors from '../../utils/getValidationErrors';
+import api from '../../services/api';
 
 import logoImg from '../../assets/logo.png';
 
@@ -31,10 +32,10 @@ interface SignUpFormData {
 
 const SigUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const emailInputRef = useRef<TextInput>(null);
-  const passwordlInputRef = useRef<TextInput>(null);
-
   const navigation = useNavigation();
+
+  const emailInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<TextInput>(null);
 
   const handleSignUp = useCallback(async (data: SignUpFormData) => {
     try {
@@ -51,6 +52,15 @@ const SigUp: React.FC = () => {
       await schema.validate(data, {
         abortEarly: false,
       });
+
+      await api.post('/users', data);
+
+      Alert.alert(
+        'Cadastro realizado com sucesso!',
+        'Você já pode fazer login na aplicação',
+      );
+
+      navigation.goBack();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
@@ -59,6 +69,7 @@ const SigUp: React.FC = () => {
 
         return;
       }
+      console.log(err);
       Alert.alert(
         'Erro no cadastro',
         'Erro ao fazer cadastro, cheque as informações',
@@ -98,6 +109,7 @@ const SigUp: React.FC = () => {
                   emailInputRef.current?.focus();
                 }}
               />
+
               <Input
                 ref={emailInputRef}
                 keyboardType="email-address"
@@ -108,15 +120,16 @@ const SigUp: React.FC = () => {
                 placeholder="E-mail"
                 returnKeyType="next"
                 onSubmitEditing={() => {
-                  passwordlInputRef.current?.focus();
+                  passwordInputRef.current?.focus();
                 }}
               />
+
               <Input
-                ref={passwordlInputRef}
+                ref={passwordInputRef}
                 secureTextEntry
                 name="password"
                 icon="lock"
-                placeholder="Password"
+                placeholder="Senha"
                 textContentType="newPassword"
                 returnKeyType="send"
                 onSubmitEditing={() => {
