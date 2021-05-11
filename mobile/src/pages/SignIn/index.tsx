@@ -30,6 +30,7 @@ const SigIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
+
   const handlesignIn = useCallback((data: object) => {
     console.log(data);
   }, []);
