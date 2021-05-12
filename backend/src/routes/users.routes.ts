@@ -54,7 +54,7 @@ usersRouter.patch(
     };
 
     return response.status(200).json(userWithoutPassword);
-  }
+  },
 );
 
 export default usersRouter;
