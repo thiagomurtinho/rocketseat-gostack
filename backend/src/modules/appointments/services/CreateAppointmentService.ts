@@ -1,10 +1,9 @@
 import { startOfHour } from 'date-fns';
 import { getCustomRepository, getRepository } from 'typeorm';
 
-import AppError from '../errors/AppError';
-import Appointment from '../models/Appointment';
+import AppError from '@shared/errors/AppError';
+import Appointment from '../infra/typeorm/entities/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentRepository';
-import appointmentsRouter from '../routes/appointments.routes';
 
 interface IRequestDTO {
   provider_id: string;
@@ -21,7 +20,7 @@ class CreateAppointmentService {
     const appointmentDate = startOfHour(date);
 
     const findAppointmentInSameDate = await appointmentsRepository.findByDate(
-      appointmentDate
+      appointmentDate,
     );
 
     if (findAppointmentInSameDate) {
