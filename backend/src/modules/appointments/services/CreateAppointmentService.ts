@@ -1,11 +1,12 @@
-import { format, getHours, isBefore, startOfHour } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
+import { startOfHour, isBefore, getHours, format } from 'date-fns';
 
 import AppError from '@shared/errors/AppError';
 
-import Appointment from '../infra/typeorm/entities/Appointment';
-import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
+import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
+
+import Appointment from '../infra/typeorm/entities/Appointment';
 
 interface IRequest {
   date: Date;
@@ -40,7 +41,7 @@ class CreateAppointmentService {
 
     if (getHours(appointmentDate) < 8 || getHours(appointmentDate) > 17) {
       throw new AppError(
-        "You can't create an appointment between 8pm and 5pm.",
+        'You can only create appontments between 8am and 5pm.',
       );
     }
 
@@ -51,18 +52,17 @@ class CreateAppointmentService {
     if (findAppointmentInSameDate) {
       throw new AppError('This appointment is already booked');
     }
-
     const appointment = await this.appointmentsRepository.create({
       provider_id,
       user_id,
       date: appointmentDate,
     });
 
-    const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
+    const dateFormatted = format(appointment.date, "dd/MM/yyyy 'às' HH:mm'h'");
 
     await this.notificationsRepository.create({
       recipient_id: provider_id,
-      content: `Novo agendamento para ${dateFormatted}`,
+      content: `Novo agendamento para dia ${dateFormatted}`,
     });
 
     return appointment;
