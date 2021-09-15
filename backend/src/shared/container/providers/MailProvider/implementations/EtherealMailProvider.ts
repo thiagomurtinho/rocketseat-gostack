@@ -8,7 +8,7 @@ import { template } from 'handlebars';
 
 @injectable()
 export default class EtherealMailProvider implements IMailProvider {
-  private cliente: Transporter;
+  private client: Transporter;
 
   constructor(
     @inject('MailTemplateProvider')
@@ -25,7 +25,7 @@ export default class EtherealMailProvider implements IMailProvider {
         },
       });
 
-      this.cliente = transporter;
+      this.client = transporter;
     });
   }
 
@@ -35,7 +35,7 @@ export default class EtherealMailProvider implements IMailProvider {
     subject,
     templateData,
   }: ISendMailDTO): Promise<void> {
-    const massage = await this.cliente.sendMail({
+    const massage = await this.client.sendMail({
       from: {
         name: from?.name || 'Equipe GoBarber',
         address: from?.email || 'equipe@gobarber.com.br',

@@ -8,3 +8,11 @@ node_modules/
 tmp/*
 !tmp/.gitkeep
 
+#enviroments
+.env
+
+#Tests -  disable to studies
+#corevare
+
+#DB -  disable to studies
+# ormconfig.json
