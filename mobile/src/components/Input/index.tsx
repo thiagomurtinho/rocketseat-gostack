@@ -77,6 +77,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
       />
 
       <TextInput
+        name={name}
         ref={inputElementRef}
         keyboardAppearance="dark"
         placeholderTextColor="#666360"
