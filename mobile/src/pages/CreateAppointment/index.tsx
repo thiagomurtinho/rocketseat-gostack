@@ -1,17 +1,29 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
 import {
   BackButton,
   Container,
   Header,
   HeaderTitle,
+  ProviderAvatar,
+  ProviderContainer,
+  ProviderName,
+  ProvidersList,
+  ProvidersListContainer,
   UserAvatar,
 } from './styles';
 
 interface RouteParams {
   providerId: string;
+}
+
+export interface Provider {
+  id: string;
+  name: string;
+  avatar_url: string;
 }
 
 const CreateAppointmet: React.FC = () => {
@@ -21,12 +33,22 @@ const CreateAppointmet: React.FC = () => {
   const { goBack } = useNavigation();
   const routeParams = route.params as RouteParams;
 
+  const [providers, setProviders] = useState<Provider[]>([]);
+  const [selectedProvider, setSlectedProvider] = useState(
+    routeParams.providerId,
+  );
+
+  useEffect(() => {
+    api.get('providers').then(response => setProviders(response.data));
+  }, []);
+
   const navigateBack = useCallback(() => {
     goBack();
   }, [goBack]);
 
-  console.log(route.params);
-
+  const handleSelectProvider = useCallback((providerId: string) => {
+    setSlectedProvider(providerId);
+  }, []);
   return (
     <Container>
       <Header>
@@ -37,6 +59,26 @@ const CreateAppointmet: React.FC = () => {
 
         <UserAvatar source={{ uri: user.avatar_url }} />
       </Header>
+
+      <ProvidersListContainer>
+        <ProvidersList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={providers}
+          keyExtractor={provider => provider.id}
+          renderItem={({ item: provider }) => (
+            <ProviderContainer
+              onPress={() => handleSelectProvider(provider.id)}
+              selected={provider.id === selectedProvider}
+            >
+              <ProviderAvatar source={{ uri: provider.avatar_url }} />
+              <ProviderName selected={provider.id === selectedProvider}>
+                {provider.name}
+              </ProviderName>
+            </ProviderContainer>
+          )}
+        />
+      </ProvidersListContainer>
     </Container>
   );
 };
