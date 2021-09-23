@@ -15,4 +15,7 @@ tmp/*
 #corevare
 
 #DB -  disable to studies
-# ormconfig.json
+ormconfig.json
+
+#Building files
+dist/
