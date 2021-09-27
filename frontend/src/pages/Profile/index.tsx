@@ -57,8 +57,13 @@ const Profile: React.FC = () => {
           abortEarly: false,
         });
 
-        const { name, email, old_password, password, password_confirmation } =
-          data;
+        const {
+          name,
+          email,
+          old_password,
+          password,
+          password_confirmation,
+        } = data;
 
         const formData = {
           name,

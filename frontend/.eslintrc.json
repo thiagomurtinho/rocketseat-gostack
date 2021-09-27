@@ -25,7 +25,6 @@
       "prettier"
   ],
   "rules": {
-    "react/require-default-props": "off",
     "camelcase":"off",
     "import/no-extraneous-dependencies": "off",
     "import/no-duplicates": "off",
